@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: angularleaguetable/ClientApp/package-lock.json
+
+      - name: Restore .NET dependencies
+        run: dotnet restore angularleaguetable.sln
+
+      - name: Build .NET solution
+        run: dotnet build angularleaguetable.sln --no-restore --configuration Release
+
+      - name: Run .NET tests
+        run: dotnet test angularleaguetable.sln --no-build --configuration Release
+
+      - name: Install frontend dependencies
+        run: npm ci --legacy-peer-deps
+        working-directory: angularleaguetable/ClientApp
+
+      # Full frontend test/build gating is enabled in PR4 after Angular toolchain alignment.
+      - name: Frontend compatibility note
+        run: echo "Frontend ng build/ng test gating deferred to Angular alignment phase."
+        working-directory: angularleaguetable/ClientApp
