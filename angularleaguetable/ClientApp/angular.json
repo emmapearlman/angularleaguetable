@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "angularleaguetable"
+  "defaultProject": "angularleaguetable",
+  "cli": {
+    "analytics": false
+  }
 }

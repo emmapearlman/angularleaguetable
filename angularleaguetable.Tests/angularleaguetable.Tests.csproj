@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\angularleaguetable\WeatherForecast.cs" />
-    <Compile Include="..\angularleaguetable\Controllers\WeatherForecastController.cs" />
+    <ProjectReference Include="..\angularleaguetable\angularleaguetable.csproj" />
   </ItemGroup>
 
 </Project>
