@@ -40,7 +40,10 @@ jobs:
         run: npm ci --legacy-peer-deps
         working-directory: angularleaguetable/ClientApp
 
-      # Full frontend test/build gating is enabled in PR4 after Angular toolchain alignment.
-      - name: Frontend compatibility note
-        run: echo "Frontend ng build/ng test gating deferred to Angular alignment phase."
+      - name: Run frontend unit tests
+        run: CI=true npm test -- --watch=false --browsers=ChromeHeadless
+        working-directory: angularleaguetable/ClientApp
+
+      - name: Build frontend application
+        run: npm run build -- --prod
         working-directory: angularleaguetable/ClientApp

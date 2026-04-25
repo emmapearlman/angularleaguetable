@@ -11,4 +11,9 @@ describe('App', () => {
     page.navigateTo();
     expect(page.getMainHeading()).toEqual('Hello, world!');
   });
+
+  it('should navigate to fetch-data and display forecast heading', () => {
+    page.navigateTo('/fetch-data');
+    expect(page.getForecastHeading()).toEqual('Weather forecast');
+  });
 });
